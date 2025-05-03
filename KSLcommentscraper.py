@@ -1,5 +1,6 @@
 import requests
 from Comment import Comment
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
 
 def KSLCommentRequest(url : str, topic : str):
@@ -53,11 +54,17 @@ def KSLCommentRequest(url : str, topic : str):
         for line in comment['message']:
             message += line
             message += ' '
-        newComment = Comment('KSL', url, topic, message, 'Sentiment')
+        analyzer = SentimentIntensityAnalyzer()
+        sentiment = analyzer.polarity_scores(message)['compound']
+        newComment = Comment('KSL', url, topic, message, sentiment)
         processedComments.append(newComment)
     
     return processedComments
         
 
 if __name__ == "__main__":
-    KSLCommentRequest('https://www.ksl.com/article/51304393/us-senate-rejects-bill-to-rein-in-trump-tariffs-as-economy-contracts', 'Politics')
+    comments = KSLCommentRequest('https://www.ksl.com/article/51304393/us-senate-rejects-bill-to-rein-in-trump-tariffs-as-economy-contracts', 'Politics')
+    with open('KSLComments.txt', 'w') as file:
+        for comment in comments:
+            file.write(str(comment))
+            file.write('\n')

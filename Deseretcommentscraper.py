@@ -1,6 +1,8 @@
 import requests
 import re
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from Comment import Comment
+
 
 
 def DeseretCommentRequest(url : str, topic : str):
@@ -61,8 +63,10 @@ def DeseretCommentRequest(url : str, topic : str):
 
     def parsecomments(root,list):
         for comment in root['edges']:
-            message = comment['node']['body']
-            newComment = Comment('Deseret', url, topic, message, 'Sentiment')
+            message = re.sub(r'<\/?...?>', '', comment['node']['body'])
+            analyzer = SentimentIntensityAnalyzer()
+            sentiment = analyzer.polarity_scores(message)['compound']
+            newComment = Comment('Deseret', url, topic, message, sentiment)
             list.append(newComment)
             parsecomments(comment['node']['replies'], processedComments)
     
@@ -71,5 +75,9 @@ def DeseretCommentRequest(url : str, topic : str):
     return processedComments
 
 if __name__ == "__main__":
-    DeseretCommentRequest('https://www.deseret.com/faith/2025/05/01/donny-osmond-joseph-christ-testimony-byu-womens-conference/', 'Politics')
+    comments = DeseretCommentRequest('https://www.deseret.com/faith/2025/05/01/donny-osmond-joseph-christ-testimony-byu-womens-conference/', 'Politics')
+    with open('DeseretComments.txt', 'w') as file:
+        for comment in comments:
+            file.write(str(comment))
+            file.write('\n')
 
