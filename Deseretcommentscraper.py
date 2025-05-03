@@ -1,6 +1,7 @@
 import requests
 import re
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+from Comment import commentsToCSV
 from Comment import Comment
 
 
@@ -76,8 +77,5 @@ def DeseretCommentRequest(url : str, topic : str):
 
 if __name__ == "__main__":
     comments = DeseretCommentRequest('https://www.deseret.com/faith/2025/05/01/donny-osmond-joseph-christ-testimony-byu-womens-conference/', 'Politics')
-    with open('DeseretComments.txt', 'w') as file:
-        for comment in comments:
-            file.write(str(comment))
-            file.write('\n')
+    commentsToCSV(comments, 'Deseretcomments.csv')
 

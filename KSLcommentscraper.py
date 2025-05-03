@@ -1,5 +1,6 @@
 import requests
 from Comment import Comment
+from Comment import commentsToCSV
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
 
@@ -64,7 +65,4 @@ def KSLCommentRequest(url : str, topic : str):
 
 if __name__ == "__main__":
     comments = KSLCommentRequest('https://www.ksl.com/article/51304393/us-senate-rejects-bill-to-rein-in-trump-tariffs-as-economy-contracts', 'Politics')
-    with open('KSLComments.txt', 'w') as file:
-        for comment in comments:
-            file.write(str(comment))
-            file.write('\n')
+    commentsToCSV(comments, 'KSLcomments.csv')

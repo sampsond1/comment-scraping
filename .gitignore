@@ -1,6 +1,7 @@
 plan.txt
-chromedriver-win64
 tests.py
 __pycache__
 DeseretComments.txt
 KSLComments.txt
+Deseretcomments.csv
+KSLcomments.csv
