@@ -10,8 +10,8 @@ class Comment:
     def __str__(self):
         return f'{self.site},{self.topic},{self.sentiment},"{self.message}",{self.url}'
 
-def commentsToCSV(listofComments, path):
-    with open(path, 'w') as file:
+def commentsToCSV(listofComments : list[Comment], path : str):
+    with open(path, 'w', encoding='utf-8') as file:
         file.write('Site,Topic,Polarity,Comment,Article URL\n')
         for comment in listofComments:
             comment.message.replace('"', '""')

@@ -64,18 +64,19 @@ def DeseretCommentRequest(url : str, topic : str):
 
     def parsecomments(root,list):
         for comment in root['edges']:
-            message = re.sub(r'<\/?...?>', '', comment['node']['body'])
+            message = re.sub(r'<\/?..?.?.?>|<blockquote>.*<\/blockquote>', '', comment['node']['body'])
             analyzer = SentimentIntensityAnalyzer()
             sentiment = analyzer.polarity_scores(message)['compound']
             newComment = Comment('Deseret', url, topic, message, sentiment)
             list.append(newComment)
-            parsecomments(comment['node']['replies'], processedComments)
+            if 'replies' in comment['node']:
+                parsecomments(comment['node']['replies'], processedComments)
     
     parsecomments(comments, processedComments)
 
     return processedComments
 
 if __name__ == "__main__":
-    comments = DeseretCommentRequest('https://www.deseret.com/faith/2025/05/01/donny-osmond-joseph-christ-testimony-byu-womens-conference/', 'Politics')
+    comments = DeseretCommentRequest('https://www.deseret.com/u-s-world/2025/04/07/british-prime-minister-reaction-trump-tariff-us-uk/', 'Politics')
     commentsToCSV(comments, 'Deseretcomments.csv')
 
