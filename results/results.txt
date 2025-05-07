@@ -1,0 +1,10 @@
+                     df      sum_sq   mean_sq         F    PR(>F)
+C(Site)             1.0    0.464984  0.464984  1.584354  0.208629
+C(Topic)            2.0    3.902351  1.951175  6.648305  0.001395
+C(Site):C(Topic)    2.0    1.056012  0.528006  1.799093  0.166349
+Residual          594.0  174.329882  0.293485       NaN       NaN
+
+Eta-squared for model is 0.030171066484133.
+Partial eta-squared for Site is 0.0026601678417647536.
+Partial eta-squared for Topic is 0.021894753404589313.
+Partial eta-squared for interaction is 0.006021077978557985.
