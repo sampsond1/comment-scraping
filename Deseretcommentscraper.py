@@ -64,7 +64,7 @@ def DeseretCommentRequest(url : str, topic : str):
 
     def parsecomments(root,list):
         for comment in root['edges']:
-            message = re.sub(r'<\/?..?.?.?>|<blockquote>.*<\/blockquote>', '', comment['node']['body'])
+            message = re.sub(r'<\/?..?.?.?>|<blockquote>.*<\/blockquote>|\n', '', comment['node']['body'])
             analyzer = SentimentIntensityAnalyzer()
             sentiment = analyzer.polarity_scores(message)['compound']
             newComment = Comment('Deseret', url, topic, message, sentiment)
