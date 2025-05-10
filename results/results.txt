@@ -8,3 +8,10 @@ Eta-squared for model is 0.030171066484133.
 Partial eta-squared for Site is 0.0026601678417647536.
 Partial eta-squared for Topic is 0.021894753404589313.
 Partial eta-squared for interaction is 0.006021077978557985.
+
+Deseret - Business: Mean - 0.10937  Std dev - 0.50485.
+Deseret - Politics: Mean - 0.10436  Std dev - 0.55889.
+Deseret - Sports: Mean - 0.34697  Std dev - 0.52269.
+KSL - Business: Mean - 0.15725  Std dev - 0.57990.
+KSL - Politics: Mean - 0.04707  Std dev - 0.56103.
+KSL - Sports: Mean - 0.18934  Std dev - 0.51908.
